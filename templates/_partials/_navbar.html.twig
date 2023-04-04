@@ -17,13 +17,6 @@
 			
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path('projets') }}">Projets</a>
-
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="../debuterSymfony" target="_blank">Postman</a>
-					<a class="dropdown-item" href="" target="_blank">Trocnc</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="" target="_blank">Module de Paiement Stripe</a>
-				</div>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path('envoyerMessageContact') }}">Contact</a>
@@ -32,10 +25,18 @@
 				<a class="nav-link" >|</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{{ path('zoneDev') }}">Zone de développement</a>
-			</li>
-			<li class="nav-item">
 				<a class="nav-link" href="{{ path('dontpn') }}">Faites un don</a>
+			</li>
+			
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Categories
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					{% for category in categoryRepository.findAll()	 %}
+						<a class="dropdown-item" href="{{ path('product_category', {'slug':category.slug}) }}">{{category.name}}</a>
+					{% endfor %}
+				</div>
 			</li>
 
 
@@ -47,13 +48,20 @@
 
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
+				<a class="nav-link" href="{{ path('cart_show') }}">
+					<i class="fas fa-shopping-cart"></i>
+					Panier ({{cartService.total()/100}} €)
+				</a>
 			</li>
+			
 				{% if app.user %}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('security_logout') }}">Logout</a>
 					</li>
 					{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('security_login') }}">Login</a>
 					</li>
