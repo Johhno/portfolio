@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Contact;
 use App\Entity\Product;
 use App\Entity\Purchase;
+use App\Entity\PurchaseItem;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -87,7 +88,15 @@ class AppFixtures extends Fixture
             $selectedProducts = $faker->randomElements($products, mt_rand(3, 5));
 
             foreach ($selectedProducts as $product) {
-                $purchase->addProduct($product);
+                $purchasedItem = new PurchaseItem;
+                $purchasedItem->setProduct($product)
+                    ->setProductName($product->getName())
+                    ->setProductPrice($product->getPrice())
+                    ->setQuantity(mt_rand(1, 3))
+                    ->setTotal($purchasedItem->getProductPrice() * $purchasedItem->getQuantity())
+                    ->setPurchase($purchase);
+
+                $manager->persist($purchasedItem);
             }
             if ($faker->boolean(90)) {
                 $purchase->setStatus(Purchase::STATUS_PAID);
