@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Contact;
 use App\Entity\Product;
 use App\Entity\Purchase;
+use App\Entity\PurchaseItem;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -31,6 +32,8 @@ class AppFixtures extends Fixture
         $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
         $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
 
+
+        $products = [];
         for ($c = 0; $c < 3; $c++) {
             $category = new Category;
             $category->setName($faker->department)
@@ -47,6 +50,7 @@ class AppFixtures extends Fixture
                     ->setShortDescription($faker->paragraph())
                     ->setMainPicture($faker->imageUrl(400, 400, true));
 
+                $products[] = $product;
                 $manager->persist($product);
             }
         }
@@ -80,6 +84,20 @@ class AppFixtures extends Fixture
                 ->setUser($faker->randomElement($users))
                 ->setTotal(mt_rand(2000, 30000))
                 ->setPurchasedAt($faker->dateTimeBetween('-6 months'));
+
+            $selectedProducts = $faker->randomElements($products, mt_rand(3, 5));
+
+            foreach ($selectedProducts as $product) {
+                $purchasedItem = new PurchaseItem;
+                $purchasedItem->setProduct($product)
+                    ->setProductName($product->getName())
+                    ->setProductPrice($product->getPrice())
+                    ->setQuantity(mt_rand(1, 3))
+                    ->setTotal($purchasedItem->getProductPrice() * $purchasedItem->getQuantity())
+                    ->setPurchase($purchase);
+
+                $manager->persist($purchasedItem);
+            }
             if ($faker->boolean(90)) {
                 $purchase->setStatus(Purchase::STATUS_PAID);
             }
