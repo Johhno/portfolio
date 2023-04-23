@@ -59,16 +59,12 @@ class PurchaseConfirmationController
             return new RedirectResponse($this->router->generate('cart_show'));
         }
 
-        $data = $form->getData();
-        //dd($form->getData());
+        $purchase = $form->getData();
+
 
         // 5. Nous allons créer une purchase
-        $purchase = new Purchase();
-        $purchase->setFullName($data['fullName'])
-            ->setAddress($data['address'])
-            ->setPostalCode($data['postalCode'])
-            ->setCity($data['city']);
-        //dd($purchase);
+
+
         // 6. Nous allons la lier avec l'utilisateur actuellement connecté (Security)
 
         // 7. Nous allons la lier avec les produits qui sont dans le panier (CartService)
