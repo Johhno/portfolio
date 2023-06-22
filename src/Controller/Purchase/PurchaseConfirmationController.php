@@ -2,20 +2,15 @@
 
 namespace App\Controller\Purchase;
 
-use DateTime;
 use App\Entity\Purchase;
 use App\Cart\CartService;
-use App\Entity\PurchaseItem;
 use App\Form\CartConfirmationType;
 use App\Purchase\PurchasePersister;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PurchaseConfirmationController extends AbstractController
 {
@@ -52,7 +47,7 @@ class PurchaseConfirmationController extends AbstractController
         // 3. Si je ne suis pas connecté : dégager(Security)
         $user = $this->getUser();
 
-        // 4. Si il n'ya pas de produits dans mon panier : dégager (CartService)
+        // 4. Si il n'y a pas de produits dans mon panier : dégager (CartService)
         $cartItems = $this->cartService->getDetailedCartItems();
 
         if (count($cartItems) === 0) {
