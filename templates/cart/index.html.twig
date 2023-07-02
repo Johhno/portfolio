@@ -50,7 +50,14 @@
             {{ form_start( confirmationForm, {'action': path('purchase_confirm')} ) }}
 
             {{ form_widget(confirmationForm) }}
-
+<iframe
+  width="450"
+  height="250"
+  frameborder="0" style="border:0"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAir6_HMueSArrYsoUySI2zhz_xXktJ50M&q=Eiffel+Tower,Paris+France"
+  allowfullscreen>
+</iframe>
             <button class="submit btn btn-success">Je confirme</button>
 
             {{ form_end(confirmationForm) }}
@@ -64,3 +71,5 @@
         <h5>Votre panier est vide</h5> 
     {% endif %}
 {% endblock %}
+ 
+
