@@ -49,6 +49,11 @@
             <h2>Confirmez votre commande en remplissant ce formulaire</h2>
             {{ form_start( confirmationForm, {'action': path('purchase_confirm')} ) }}
 
+<div style='display:block;'>
+	    <input id="pac-input" class="controls" type="text" placeholder="Saisir votre adresse de livraison"/>
+    <div id="map"></div>
+
+    </div>
             {{ form_widget(confirmationForm) }}
 <iframe
   width="450"
