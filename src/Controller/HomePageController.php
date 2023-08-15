@@ -21,7 +21,7 @@ class HomePageController extends AbstractController
      */
     public function hello()
     {
-        return $this->render('hello.html.twig');
+        return $this->render('homepage.html.twig');
     }
 
     /**
@@ -55,6 +55,7 @@ class HomePageController extends AbstractController
     {
         return $this->render('dontpn.html.twig');
     }
+
 
     /**
      * @Route("/upload", name="upload")

@@ -7,20 +7,25 @@
 <div class="col-md-8 mt-5">
 	<h1>Connexion</h1>
 
-{% if error %}
-<div class="alert alert danger">
-{{ error.message }}
-</div>
-{% endif %}
+	{% if error %}
+		<div class="alert alert danger">
+			{{ error.message }}
+		</div>
+	{% endif %}
 
 	{{ form_start(formView) }}
 
 	{{ form_widget(formView) }}
 
+	{# BOUTON CONNEXION #}
 	<button type='submit' class="btn btn-success">Connexion</button>
-	<button type='submit' class="btn btn-success">Connexion avec Discord</button>
-	
+	 
+  
 	<a href='{{ path('app_forgot_password_request')}}'>Mot de passe oublié?</a>
+
 	{{ form_end(formView) }}
+
+
+
 </div>
 {% endblock %}
