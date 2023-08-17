@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     brochures_directory: '%kernel.project_dir%/public/uploads/brochures'
+    app.discord_client_id: '%env(DISCORD_CLIENT_ID)%'
+    app.discord_client_secret: '%env(DISCORD_CLIENT_SECRET)%'
 services:
     # default configuration for services in *this* file
     _defaults:
