@@ -59,6 +59,16 @@ class User implements UserInterface
      */
     private $purchases;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $discordID;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $discordUsername;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -195,6 +205,30 @@ class User implements UserInterface
                 $purchase->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDiscordID(): ?string
+    {
+        return $this->discordID;
+    }
+
+    public function setDiscordID(?string $discordID): self
+    {
+        $this->discordID = $discordID;
+
+        return $this;
+    }
+
+    public function getDiscordUsername(): ?string
+    {
+        return $this->discordUsername;
+    }
+
+    public function setDiscordUsername(?string $discordUsername): self
+    {
+        $this->discordUsername = $discordUsername;
 
         return $this;
     }
