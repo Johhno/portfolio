@@ -35,8 +35,8 @@ class InscriptionSuccessEmailSubscriber implements EventSubscriberInterface
         $fromEmail = $userEvent->getUser()->getEmail();
         $fullname = $userEvent->getUser()->getFullname();
         $email
-            ->from(new Address($fromEmail, $fullname))
-            ->to("screfield@gmail.com")
+            ->from("contact@johntchu.com")
+            ->to(new Address($fromEmail, $fullname))
             ->text("Bienvenue. Inscription réussi.")
             ->htmlTemplate('emails/inscription_view.html.twig')
             ->context([

@@ -36,8 +36,8 @@ class ContactSuccessEmailSubscriber implements EventSubscriberInterface
         $nom = $messageContactEvent->getContact()->getNom();
         $prenom = $messageContactEvent->getContact()->getPrenom();
         $email
-            ->from(new Address($fromEmail, $nom . ' ' . $prenom))
-            ->to("admin@test.com")
+            ->from("contact@johntchu.com")
+            ->to(new Address($fromEmail, $nom . ' ' . $prenom))
             ->text("Le service admin a bien reçu votre message")
             ->htmlTemplate('emails/contact_view.html.twig')
             ->context([
