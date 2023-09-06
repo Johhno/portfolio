@@ -17,4 +17,15 @@ class StripeService
             $this->privateKey = $_ENV['STRIPE_SECRET_KEY_LIVE'];
         }
     }
+
+    public function paymentIntent(Product $product)
+    {
+        \Stripe\Stripe::setApiKey($this->privateKey);
+
+        return \Stripe\PaymentIntent::create([
+            'amount' => $product->getPrice() * 100,
+            'currency' => 'eur',
+            'payment_method_types' => ['card']
+        ]);
+    }
 }
