@@ -8,6 +8,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DonPaymentController extends AbstractController
 {
+
+    /**
+     * @Route("/pay", name="pay")
+     */
+    public function pay()
+    {
+        return $this->render('pay.html.twig');
+    }
+
+
+
     /** 
      * @Route("/don",name="don")
      * 
@@ -21,11 +32,10 @@ class DonPaymentController extends AbstractController
         ]);
 
         //dd($paymentIntent->client_secret);
-        return $this->render('don.html.twig', [
+        return $this->render('dontpn.html.twig', [
             'clientSecret' => $paymentIntent->client_secret
         ]);
     }
-
 
     /**
      * @Route("/charge", name="charge")

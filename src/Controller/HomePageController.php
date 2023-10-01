@@ -41,23 +41,6 @@ class HomePageController extends AbstractController
     }
 
     /**
-     * @Route("/don", name="don")
-     */
-    public function don()
-    {
-        return $this->render('don.html.twig');
-    }
-
-    /**
-     * @Route("/dontpn", name="dontpn")
-     */
-    public function dontpn()
-    {
-        return $this->render('dontpn.html.twig');
-    }
-
-
-    /**
      * @Route("/upload", name="upload")
      */
     public function upload()
