@@ -8,8 +8,7 @@
         "bluemmb/faker-picsum-photos-provider": "^2.0",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.11",
-        "google/apiclient": "2.10",
+        "doctrine/orm": "^2.11", 
         "karser/karser-recaptcha3-bundle": "^0.1.23",
         "knpuniversity/oauth2-client-bundle": "^2.15",
         "league/oauth2-google": "^4.0",
@@ -48,7 +47,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
