@@ -52,3 +52,13 @@ https://www.forevolve.com/en/articles/2016/10/27/how-to-add-your-php-runtime-dir
 ## Notes
 - phpmyadmin => 5.6 
 - phpmyadmin6 => PHP 7.3+
+
+composer update "symfony/*" --with-all-dependencies --no-interaction --no-ansi
+composer require symfony/flex --no-interaction --no-ansi
+
+git add composer.json composer.lock
+git commit -m "backup avant maj symfony 6.4 " || true
+composer update "symfony/*" --with-all-dependencies -W
+composer require sensio/framework-extra-bundle:^6.2 -W
+composer run-script auto-scripts
+php bin/console cache:clear
