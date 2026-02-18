@@ -1,11 +1,8 @@
 # portfolio
-portfolio de john
-
-Modifier
+portfolio
 
 # Extensions VCStudio
-
-Php intelephense . Ben Mewburn
+PHP intelephense . Ben Mewburn
 
 Twig language 2 . mblode
 
@@ -17,18 +14,36 @@ format on save
 
 emmet include languages
 item twig value html
+
+## Prérequis
+
+- install scoop
+```shell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
+
+- install symfony 
+```shell
+scoop install symfony-cli
+```
+- install/update composer
 ```shell
 Symfony flex => composer require annotations (Routes)
                 composer require twig (HTML)
                 composer req debug
                 composer req doctrine
 ```
-## Commandes
+- lancer
 ```shell
 symfony serve
 (background)symfony serve -d
 ```
+
 ## Doc
 https://symfony.com/doc/current/setup/symfony_server.html
 ## PHP not found
 https://www.forevolve.com/en/articles/2016/10/27/how-to-add-your-php-runtime-directory-to-your-windows-10-path-environment-variable/
+## Notes
+- phpmyadmin => 5.6 
+- phpmyadmin6 => PHP 7.3+
