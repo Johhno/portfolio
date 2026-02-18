@@ -39,6 +39,11 @@ Symfony flex => composer require annotations (Routes)
 symfony serve
 (background)symfony serve -d
 ```
+- folder migrations
+
+```shell
+php bin/console make:migration
+```
 
 ## Doc
 https://symfony.com/doc/current/setup/symfony_server.html
