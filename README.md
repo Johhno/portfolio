@@ -59,6 +59,15 @@ composer require symfony/flex --no-interaction --no-ansi
 git add composer.json composer.lock
 git commit -m "backup avant maj symfony 6.4 " || true
 composer update "symfony/*" --with-all-dependencies -W
-composer require sensio/framework-extra-bundle:^6.2 -W
 composer run-script auto-scripts
 php bin/console cache:clear
+
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+    #[Route('/purchases', name: 'purchase_index')]
+    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté pour consulter vos commandes.')]
+    public function index(): Response
+
+        /**
+     * @Route("/purchases", name="purchase_index")
+     * @IsGranted("ROLE_USER", message="Vous devez être connecté pour consulter vos commandes.")
+     */

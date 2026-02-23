@@ -21,19 +21,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Event\ContactSuccessEvent;
 use App\Event\InscriptionSuccessEvent;
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ContactController extends AbstractController
 {
-    protected $recaptcha3Validator;
     protected $em;
     protected $flashBag;
     protected $dispatcher;
 
-    public function __construct(EventDispatcherInterface $dispatcher, FlashBagInterface $flashBag, Recaptcha3Validator $recaptcha3Validator, EntityManagerInterface $em)
+    public function __construct(EventDispatcherInterface $dispatcher, FlashBagInterface $flashBag, EntityManagerInterface $em)
     {
-        $this->recaptcha3Validator = $recaptcha3Validator;
         $this->em = $em;
         $this->flashBag = $flashBag;
         $this->dispatcher = $dispatcher;
@@ -55,7 +53,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Récupère le score
-            $score = $this->recaptcha3Validator->getLastResponse()->getScore();
+           // $score = $this->recaptcha3Validator->getLastResponse()->getScore();
 
             /** @var UploadedFile $brochureFile */
             $brochureFile = $form->get('brochure')->getData();
@@ -154,7 +152,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Récupère le score
-            $score = $this->recaptcha3Validator->getLastResponse()->getScore();
+           // $score = $this->recaptcha3Validator->getLastResponse()->getScore();
 
             $user = $form->getData();
             $password = $user->getPassword();
