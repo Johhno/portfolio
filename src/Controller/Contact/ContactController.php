@@ -15,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Event\ContactSuccessEvent;
@@ -33,9 +33,7 @@ class ContactController extends AbstractController
         $this->em = $em;
         $this->dispatcher = $dispatcher;
     }
-    /**
-     * @Route("/contact", name="envoyerMessageContact")
-     */
+    #[Route('/contact', name: 'envoyerMessageContact')]
     public function envoyerMessageContact(
         Request $request,
         SluggerInterface $slugger
@@ -101,9 +99,7 @@ class ContactController extends AbstractController
     {
     }
 
-    /**
-     * @Route("/admin/editerMessageContact/{id}", name="messageContactEdit")
-     */
+    #[Route('/admin/editerMessageContact/{id}', name: 'messageContactEdit')]
     public function editerMessageContact(
         $id,
         ContactRepository $contactRepository,
@@ -131,9 +127,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/inscription", name="inscription")
-     */
+    #[Route('/inscription', name: 'inscription')]
     public function inscription(
         Request $request,
         UserPasswordHasherInterface $encoder

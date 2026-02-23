@@ -6,7 +6,7 @@ use App\Form\UploadType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class HomePageController extends AbstractController
@@ -16,33 +16,25 @@ class HomePageController extends AbstractController
     {
         $this->encoder = $encoder;
     }
-    /**
-     * @Route("/", name="homepage")
-     */
+    #[Route('/', name: 'homepage')]
     public function hello()
     {
         return $this->render('homepage.html.twig');
     }
 
-    /**
-     * @Route("/cv", name="cv")
-     */
+    #[Route('/cv', name: 'cv')]
     public function cv()
     {
         return $this->render('cv.html.twig');
     }
 
-    /**
-     * @Route("/projets", name="projets")
-     */
+    #[Route('/projets', name: 'projets')]
     public function projets()
     {
         return $this->render('projets.html.twig');
     }
 
-    /**
-     * @Route("/upload", name="upload")
-     */
+    #[Route('/upload', name: 'upload')]
     public function upload()
     {
         $target_dir = "uploads/";

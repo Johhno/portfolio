@@ -7,18 +7,11 @@ use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class GoogleController extends AbstractController
 {
-    /**
-     * Link to this controller to start the "connect" process
-     * 
-     * @Route("/connect/google", name="connect_google")
-     * @param ClientRegistry $clientRegistry
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * 
-     */
+    #[Route('/connect/google', name: 'connect_google')]
     public function connectAction(ClientRegistry $clientRegistry)
     {
 
@@ -28,13 +21,7 @@ class GoogleController extends AbstractController
             ->redirect();
     }
 
-    /**
-     * After going to Facebook,
-     *
-     * @Route("/connect/google/check", name="connect_google_check")
-     * @param Request $request
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
+    #[Route('/connect/google/check', name: 'connect_google_check')]
     public function connectCheckAction(Request $request)
     {
         if (!$this->getUser()) {

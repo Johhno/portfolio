@@ -8,7 +8,6 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
@@ -28,9 +27,7 @@ class CartController extends AbstractController
         $this->productRepository = $productRepository;
         $this->cartService = $cartService;
     }
-    /**
-     * @Route("/cart/add/{id}", name="cart_add", requirements={"id":"\d+"})
-     */
+    #[Route('/cart/add/{id}', name: 'cart_add', requirements: ['id' => '\\d+'])]
     public function add($id, Request $request): Response
     {
         //use Request $request->getSession() == $session
@@ -56,9 +53,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/cart/decrement/{id}" , name="cart_decrement", requirements={"id": "\d+"}   )
-     */
+    #[Route('/cart/decrement/{id}', name: 'cart_decrement', requirements: ['id' => '\\d+'])]
     public function decrement($id)
     {
         $product = $this->productRepository->find($id);
@@ -71,10 +66,8 @@ class CartController extends AbstractController
         $this->addFlash('success', "Le produit a bien été décrémenté.");
         return $this->redirectToRoute("cart_show");
     }
-    /**
-     * @Route("/cart", name="cart_show")
-     */
-    public function show()
+    #[Route('/cart', name: 'cart_show')]
+    public function show(): Response
     {
 
         $form = $this->createForm(CartConfirmationType::class);
@@ -93,9 +86,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/cart/delete/{id}", name="cart_delete", requirements={"id":"\d+"})
-     */
+    #[Route('/cart/delete/{id}', name: 'cart_delete', requirements: ['id' => '\\d+'])]
     public function delete($id)
     {
         $product = $this->productRepository->find($id);

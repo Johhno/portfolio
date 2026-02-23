@@ -4,7 +4,7 @@ namespace App\Controller\Contact;
 
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -24,9 +24,7 @@ class ContactConfirmationController
         $this->security = $security;
     }
 
-    /**
-     * @Route("contact/confirm", name="contact_confirm")
-     */
+    #[Route('contact/confirm', name: 'contact_confirm')]
     public function confirm(Request $request, FlashBagInterface $flashbag)
     {
         // 1. Lire les données du formulaire : FormFactoryInterface / Request

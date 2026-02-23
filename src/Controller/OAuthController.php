@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -12,9 +12,7 @@ class OAuthController extends AbstractController
 {
     private const DISCORD_ENDPOINT = 'https://discord.com/oauth2/authorize';
 
-    /**
-     * @Route("/oauth/discord", name="app_oauth_discord", methods={"GET"})
-     */
+    #[Route('/oauth/discord', name: 'app_oauth_discord', methods: ['GET'])]
     public function loginWithDiscord(
         CsrfTokenManagerInterface $csrfTokenManager,
         UrlGeneratorInterface $urlGenerator

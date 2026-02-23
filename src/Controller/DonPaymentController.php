@@ -2,16 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class DonPaymentController extends AbstractController
 {
 
-    /**
-     * @Route("/pay", name="pay")
-     */
+    #[Route('/pay', name: 'pay')]
     public function pay()
     {
         return $this->render('pay.html.twig');
@@ -19,10 +17,7 @@ class DonPaymentController extends AbstractController
 
 
 
-    /** 
-     * @Route("/don",name="don")
-     * 
-     */
+    #[Route('/don', name: 'don')]
     public function showCardForm()
     {
         \Stripe\Stripe::setApiKey('sk_test_51KfKXAArrVmPtiM7c2l9METinjYeDSwXBE6qtckuF6z6bq3OEfmePz8aWrJemNSNoUR8CKvyxtQPrxc8qg1oPPZq006I9eqvnH');
@@ -37,9 +32,7 @@ class DonPaymentController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/charge", name="charge")
-     */
+    #[Route('/charge', name: 'charge')]
     public function paiement()
     {
         $var = 'sk_test_51KfKXAArrVmPtiM7c2l9METinjYeDSwXBE6qtckuF6z6bq3OEfmePz8aWrJemNSNoUR8CKvyxtQPrxc8qg1oPPZq006I9eqvnH';
@@ -82,17 +75,13 @@ class DonPaymentController extends AbstractController
         return new Response("bro");
     }
 
-    /**
-     * @Route("/reussi", name="reussi")
-     */
+    #[Route('/reussi', name: 'reussi')]
     function reussi_paiement()
     {
         return $this->render('reussi.html.twig', ['msg' => 'toto']);
     }
 
-    /**
-     * @Route("/echec", name="echec")
-     */
+    #[Route('/echec', name: 'echec')]
     function echec_paiement($data)
     {
         return $this->render('echec.html.twig', ['msg' => $data]);

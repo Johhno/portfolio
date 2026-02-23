@@ -10,9 +10,7 @@ use App\Repository\ProductRepository;
 
 class ProductController extends AbstractController
 {
-    /**
-     * @Route("/produits", name="produits")
-     */
+    #[Route('/produits', name: 'produits')]
     public function produits(ProductRepository $productRepository)
     {
         $products = $productRepository->findBy([], [], 3);
@@ -20,9 +18,7 @@ class ProductController extends AbstractController
             'products' => $products
         ]);
     }
-    /**
-     * @Route("/{slug}",priority=-1, name="product_category")
-     */
+    #[Route('/{slug}', priority: -1, name: 'product_category')]
     public function category($slug, CategoryRepository $categoryRepository): Response
     {
         $category = $categoryRepository->findOneBy([
@@ -39,9 +35,7 @@ class ProductController extends AbstractController
     }
 
 
-    /**
-     * @Route("/{category_slug}/{slug}", priority=-1,name="product_show" )
-     */
+    #[Route('/{category_slug}/{slug}', priority: -1, name: 'product_show')]
     public function show($slug, ProductRepository $productRepository)
     {
         $product = $productRepository->findOneBy([
