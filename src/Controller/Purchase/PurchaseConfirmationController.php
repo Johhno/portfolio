@@ -8,29 +8,21 @@ use App\Form\CartConfirmationType;
 use App\Purchase\PurchasePersister;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PurchaseConfirmationController extends AbstractController
 {
 
-    protected $cartService;
-    protected $em;
-    protected $persister;
-
-    public function __construct(CartService $cartService, EntityManagerInterface $em, PurchasePersister $persister)
+    public function __construct(private CartService $cartService, private EntityManagerInterface $em, private PurchasePersister $persister)
     {
-        $this->cartService = $cartService;
-        $this->em = $em;
-        $this->persister = $persister;
     }
 
-    /**
-     * @Route("/purchase/confirm", name="purchase_confirm")
-     * @IsGranted("ROLE_USER", message="Vous devez être connecté pour confirmer une commande.")
-     */
-    public function confirm(Request $request)
+    #[Route('/purchase/confirm', name: 'purchase_confirm')]
+    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté pour confirmer une commande.')]
+    public function confirm(Request $request): Response
     {
         // 1. Nous voulons lire les données du formulaire => FormFactoryInterface/Request
         $form = $this->createForm(CartConfirmationType::class);

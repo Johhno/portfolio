@@ -5,61 +5,43 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ContactRepository::class)
- */
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le nom est obligatoire.")
-     * @Assert\Length(min=2, minMessage="Le nom doit contenir au minimum 2 caractères.")
-     * @Assert\Regex(pattern="/^[a-z]+$/i", message="Les caractères spéciaux et les chiffres ne sont pas autorisés.");
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le nom doit contenir au minimum 2 caractères.")]
+    #[Assert\Regex(pattern: "/^[a-z]+$/i", message: "Les caractères spéciaux et les chiffres ne sont pas autorisés")]
     private $nom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le prénom est obligatoire.")
-     * @Assert\Regex(pattern="/^[a-z]+$/i", message="Les caractères spéciaux et les chiffres ne sont pas autorisés.");
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
+    #[Assert\Regex(pattern: "/^[a-z]+$/i", message: "Les caractères spéciaux et les chiffres ne sont pas autorisés")]
     private $prenom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="L'email est obligatoire.")
-     * @Assert\Email(message="L'adresse email '{{ value }}' n'est pas valide.")
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank(message: "L'email est obligatoire.")]
+    #[Assert\Email(message: "L'adresse email '{{ value }}' n'est pas valide.")]
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le téléphone est obligatoire.")
-     * @Assert\Regex(pattern="/^[0-9]+$/i", message="Veuillez saisir un n° de téléphone.");
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Le téléphone est obligatoire.")]
+    #[Assert\Regex(pattern: "/^[0-9]+$/i", message: "Veuillez saisir un n° de téléphone")]
     private $telephone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez mettre un message.")
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Veuillez mettre un message.")]
     private $message;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $brochureFilename;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
+    #[ORM\Column(type: "datetime_immutable")]
     private $created_at;
     public function __construct()
     {

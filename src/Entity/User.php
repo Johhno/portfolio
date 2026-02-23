@@ -11,62 +11,43 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Le nom est obligatoire.")
-     * 
-     */
+    #[ORM\Column(type: "string", length: 180, unique: true)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: "json")]
     private $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Le mot de passe est obligatoire.")
-     * @Assert\Regex(pattern="/[a-zA-Z0-9[_-{}]/", message="Veuillez saisir un mot de passe complexe composé de lettres, de chiffres et de caractères spéciaux([_-{}]).");
      */
+    #[ORM\Column(type: "string")]
+    #[Assert\NotBlank(message: "Le mot de passe est obligatoire.")]
+    #[Assert\Regex(pattern: "/[a-zA-Z0-9[_-{}]/", message: "Veuillez saisir un mot de passe complexe composé de lettres, de chiffres et de caractères spéciaux([_-{}]).")]
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le prénom et le nom sont obligatoires.")
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Le prénom et le nom sont obligatoires.")]
     private $fullname;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
+    #[ORM\Column(type: "datetime_immutable")]
     private $created_at;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="user")
-     */
+    #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: "user")]
     private $purchases;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $discordID;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $discordUsername;
 
     public function __construct()
@@ -97,6 +78,11 @@ class User implements UserInterface
      * @see UserInterface
      */
     public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
@@ -149,7 +135,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

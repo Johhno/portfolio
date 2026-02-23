@@ -7,64 +7,42 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PurchaseRepository::class)
- */
+#[ORM\Entity(repositoryClass: PurchaseRepository::class)]
 class Purchase
 {
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_PAID = 'PAID';
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $fullName;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $address;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $postalCode;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $city;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: "integer")]
     private $total;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $status = 'PENDING';
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="purchases")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "purchases")]
     private $user;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: "datetime")]
     private $purchasedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="purchase", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: PurchaseItem::class, mappedBy: "purchase", orphanRemoval: true)]
     private $purchaseItems;
 
     public function __construct()

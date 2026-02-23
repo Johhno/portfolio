@@ -4,13 +4,16 @@ namespace App\Cart;
 
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartService
 {
     /**
-     * @var SessionInterface
+     * @var SessionInterface|null
      */
     protected $session;
+
+    protected RequestStack $requestStack;
 
     /**
      * @var ProductRepository
@@ -18,20 +21,26 @@ class CartService
     protected $productRepository;
 
 
-    public function __construct(SessionInterface $session, ProductRepository $productRepository)
+    public function __construct(RequestStack $requestStack, ProductRepository $productRepository)
     {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
         $this->productRepository = $productRepository;
     }
 
     protected function getCart(): array
     {
-        return $this->session->get('cart', []);
+        $session = $this->requestStack->getSession();
+
+        return $session ? $session->get('cart', []) : [];
     }
 
     protected function saveCart(array $cart)
     {
-        return $this->session->set('cart', $cart);
+        $session = $this->requestStack->getSession();
+
+        if ($session) {
+            $session->set('cart', $cart);
+        }
     }
 
     public function add(int $id)

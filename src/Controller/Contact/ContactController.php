@@ -10,7 +10,6 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -27,13 +26,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ContactController extends AbstractController
 {
     protected $em;
-    protected $flashBag;
     protected $dispatcher;
 
-    public function __construct(EventDispatcherInterface $dispatcher, FlashBagInterface $flashBag, EntityManagerInterface $em)
+    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->flashBag = $flashBag;
         $this->dispatcher = $dispatcher;
     }
     /**
@@ -90,7 +87,7 @@ class ContactController extends AbstractController
 
             $this->dispatcher->dispatch($contactEvent, 'message.success');
 
-            $this->flashBag->add('success', 'Votre message a été envoyé.');
+            $this->addFlash('success', 'Votre message a été envoyé.');
             //$flashBag->add('success', 'Vous recevrez une copie de votre message.');
         }
 
@@ -168,8 +165,8 @@ class ContactController extends AbstractController
 
             $this->dispatcher->dispatch($userEvent, 'user.success');
 
-            $this->flashBag->add('success', 'Inscription réussi.');
-            $this->flashBag->add('success', 'Vous recevrez une confirmation de votre inscription ainsi que le récap des vos accès.');
+            $this->addFlash('success', 'Inscription réussi.');
+            $this->addFlash('success', 'Vous recevrez une confirmation de votre inscription ainsi que le récap des vos accès.');
         }
 
         $formView = $form->createView();
