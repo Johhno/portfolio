@@ -9,14 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 class DonPaymentController extends AbstractController
 {
 
-    #[Route('/pay', name: 'pay')]
+    #[Route('/don', name: 'don')]
     public function pay()
     {
-        return $this->render('pay.html.twig');
+        return $this->render('don.html.twig');
     }
 
 
-
+/*
     #[Route('/don', name: 'don')]
     public function showCardForm()
     {
@@ -30,12 +30,12 @@ class DonPaymentController extends AbstractController
         return $this->render('dontpn.html.twig', [
             'clientSecret' => $paymentIntent->client_secret
         ]);
-    }
+    }*/
 
     #[Route('/charge', name: 'charge')]
     public function paiement()
     {
-        $var = 'sk_test_51KfKXAArrVmPtiM7c2l9METinjYeDSwXBE6qtckuF6z6bq3OEfmePz8aWrJemNSNoUR8CKvyxtQPrxc8qg1oPPZq006I9eqvnH';
+        $var = $_ENV['STRIPE_SECRET_KEY'];
 
         \Stripe\Stripe::setApiKey($var);
 
@@ -78,12 +78,12 @@ class DonPaymentController extends AbstractController
     #[Route('/reussi', name: 'reussi')]
     function reussi_paiement()
     {
-        return $this->render('reussi.html.twig', ['msg' => 'toto']);
+        return $this->render('paiement_reussi.html.twig', ['msg' => '']);
     }
 
     #[Route('/echec', name: 'echec')]
     function echec_paiement($data)
-    {
-        return $this->render('echec.html.twig', ['msg' => $data]);
+    {//data est le code d'erreur de stripe $data
+        return $this->render('paiement_echec.html.twig', ['msg' => '']);
     }
 }
