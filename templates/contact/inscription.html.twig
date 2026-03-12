@@ -3,34 +3,20 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-<script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
- <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
- <button class="g-recaptcha" 
-        data-sitekey="reCAPTCHA_site_key" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
-<!-- mx-auto -->
 <div class="col-md-8 mt-5">
-	<h1>Inscription</h1>
-	{% for rubrique, messages in app.flashes %}
-	
-	<div class="alert alert-{{rubrique}}">
-		{% for user in messages %}
-			<p>{{user}}</p>
-		{% endfor %}
-	</div>
-	{% endfor %}
+    <h1>Inscription</h1>
 
-	{{ form_start(formView) }}
+    {% for rubrique, messages in app.flashes %}
+        <div class="alert alert-{{ rubrique }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
 
-	{{ form_widget(formView) }}
-
-	<button type='submit' class="btn btn-success">Inscription</button>
-	 
-	{{ form_end(formView) }}
+    {{ form_start(formView) }}
+    {{ form_widget(formView) }}
+    <button type="submit" class="btn btn-success">Inscription</button>
+    {{ form_end(formView) }}
 </div>
 {% endblock %}

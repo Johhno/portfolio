@@ -17,7 +17,10 @@ class PurchaseItem
     private $product;
 
     #[ORM\ManyToOne(targetEntity: Purchase::class, inversedBy: "purchaseItems")]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(
+        nullable: false,
+        onDelete: "CASCADE"
+    )]
     private $purchase;
 
     #[ORM\Column(type: "string", length: 255)]

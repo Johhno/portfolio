@@ -36,13 +36,23 @@ class Purchase
     #[ORM\Column(type: "string", length: 255)]
     private $status = 'PENDING';
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "purchases")]
+    #[ORM\ManyToOne(
+        targetEntity: User::class, 
+        inversedBy: "purchases")]
+
+    #[ORM\JoinColumn(
+        nullable: false, 
+        onDelete: "CASCADE")]
     private $user;
 
     #[ORM\Column(type: "datetime")]
     private $purchasedAt;
 
-    #[ORM\OneToMany(targetEntity: PurchaseItem::class, mappedBy: "purchase", orphanRemoval: true)]
+    #[ORM\OneToMany(
+        targetEntity: PurchaseItem::class, 
+        mappedBy: "purchase", 
+        cascade: ["remove"],
+        orphanRemoval: true)]
     private $purchaseItems;
 
     public function __construct()

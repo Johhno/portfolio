@@ -41,7 +41,12 @@ class User implements UserInterface
     #[ORM\Column(type: "datetime_immutable")]
     private $created_at;
 
-    #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: "user")]
+    #[ORM\OneToMany(
+        targetEntity: Purchase::class, 
+        mappedBy: "user",
+        cascade: ["remove"],
+        orphanRemoval: true
+    )]
     private $purchases;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
