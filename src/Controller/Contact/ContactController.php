@@ -22,23 +22,25 @@ use App\Event\ContactSuccessEvent;
 use App\Event\InscriptionSuccessEvent;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 class ContactController extends AbstractController
 {
     protected $em;
     protected $dispatcher;
 
-    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $em)
+
+    public function __construct(
+        EventDispatcherInterface $dispatcher, 
+        EntityManagerInterface $em)
     {
         $this->em = $em;
         $this->dispatcher = $dispatcher;
     }
+
     #[Route('/contact', name: 'envoyerMessageContact')]
     public function envoyerMessageContact(
         Request $request,
         SluggerInterface $slugger
     ) {
-
         $contact = new Contact;
         //getForm + setData
         $form = $this->createForm(ContactType::class);
@@ -46,15 +48,12 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // Récupère le score
-           // $score = $this->recaptcha3Validator->getLastResponse()->getScore();
-
+ 
             /** @var UploadedFile $brochureFile */
             $brochureFile = $form->get('brochure')->getData();
             $contact = $form->getData();
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+
+            // Si reCAPTCHA est validé, traiter les données du formulaire
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -69,12 +68,8 @@ class ContactController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    // Gérer l'exception si le téléchargement échoue
                 }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-
             }
 
             $this->em->persist($contact);
@@ -86,7 +81,6 @@ class ContactController extends AbstractController
             $this->dispatcher->dispatch($contactEvent, 'message.success');
 
             $this->addFlash('success', 'Votre message a été envoyé.');
-            //$flashBag->add('success', 'Vous recevrez une copie de votre message.');
         }
 
         $formView = $form->createView();
@@ -95,6 +89,7 @@ class ContactController extends AbstractController
             'formView' => $formView
         ]);
     }
+
     public function confirm()
     {
     }
@@ -142,9 +137,7 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Récupère le score
-           // $score = $this->recaptcha3Validator->getLastResponse()->getScore();
-
+  
             $user = $form->getData();
             $password = $user->getPassword();
 
