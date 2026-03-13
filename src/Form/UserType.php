@@ -3,8 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
-
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type; 
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 use Symfony\Component\Form\AbstractType;
@@ -32,11 +31,14 @@ class UserType extends AbstractType
                 'attr' => ['class' => 'form-group form-control col-md-12', 'placeholder' => 'Tapez votre nom prenom'],
                 'required' => false
             ])
-
             ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(),
-                'action_name' => 'homepage',
-                'locale' => 'fr',
+                
+                'constraints' => new Recaptcha3(
+                    [
+                        'message' => 'Captcha invalide',
+                    ]
+                ),
+                'action_name' => 'inscription'
             ]);
 
         // Evenement : affiche le bloc nom si l'id est null

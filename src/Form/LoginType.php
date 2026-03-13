@@ -4,7 +4,7 @@ namespace App\Form;
 
 
 use Symfony\Component\Form\AbstractType;
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type; 
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,9 +32,13 @@ class LoginType extends AbstractType
                 ]
             ])
             ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(),
-                'action_name' => 'homepage',
-                'locale' => 'fr',
+                
+                'constraints' => new Recaptcha3(
+                    [
+                        'message' => 'Captcha invalide',
+                    ]
+                ),
+                'action_name' => 'login'
             ]);
     }
 
