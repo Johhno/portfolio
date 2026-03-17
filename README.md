@@ -1,48 +1,51 @@
-# portfolio
-portfolio
+# Portfolio
+Le portfolio est développé avec Symfony 6.4, utilisant :  
+- **Doctrine ORM 3.6.2** 
+- **Karser reCAPTCHA3 Bundle 0.3**
 
-# Extensions VCStudio
-PHP intelephense . Ben Mewburn
 
-Twig language 2 . mblode
+### VSCode Extensions recommandées
+- **PHP Intelephense** – Ben Mewburn  
+- **Twig Language 2** – mblode  
+- **PHP Namespace Resolver** – Mehedi Hassan 
 
-PHP Namespace Resolver . Mehedi Hassan
+### Settings
 
-## Settings
-suggest basic disable variables
-format on save
-
-emmet include languages
-item twig value html
+- Suggest basic disable variables  
+- Format on save  
+- Emmet include languages : `twig` → `html`
 
 ## Prérequis
 
-- install scoop
+### Installer Scoop
 ```shell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 ```
 
-- install symfony 
+### Installer Symfony 
 ```shell
 scoop install symfony-cli
 ```
-- install/update composer
-```shell
-Symfony flex => composer require annotations (Routes)
-                composer require twig (HTML)
-                composer req debug
-                composer req doctrine
+
+### Mettre à jour Composer et dépendances Symfony
+#### Symfony Flex
+```bash 
+composer install
 ```
-- lancer
+```bash 
+composer show
+```
 ```shell
-symfony serve
+symfony serve              # lance le serveur en premier plan
 (background)symfony serve -d
 ```
-- folder migrations
 
+### Gérer les migrations Doctrine
 ```shell
 php bin/console make:migration
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
 ```
 
 ## Doc
@@ -52,7 +55,7 @@ https://www.forevolve.com/en/articles/2016/10/27/how-to-add-your-php-runtime-dir
 ## Notes
 - phpmyadmin => 5.6 
 - phpmyadmin6 => PHP 7.3+
-
+```shell
 composer update "symfony/*" --with-all-dependencies --no-interaction --no-ansi
 composer require symfony/flex --no-interaction --no-ansi
 
@@ -71,3 +74,4 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
      * @Route("/purchases", name="purchase_index")
      * @IsGranted("ROLE_USER", message="Vous devez être connecté pour consulter vos commandes.")
      */
+```
