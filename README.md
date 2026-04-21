@@ -16,11 +16,13 @@ Le portfolio est développé avec Symfony 6.4, utilisant :
 - Emmet include languages : `twig` → `html`
 
 ## Prérequis
-
+Importer la base de données
+importer les fichiers .env
 ### Installer Scoop
+Ouvrir powershell en mode sans admin
+windows + r > runas /trustlevel:0x20000 powershell
 ```shell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 ```
 
 ### Installer Symfony 

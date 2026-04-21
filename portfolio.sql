@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 22, 2023 at 02:44 PM
--- Server version: 5.7.33
--- PHP Version: 7.2.19
+-- Hôte : localhost:3306
+-- Généré le : mar. 21 avr. 2026 à 14:06
+-- Version du serveur : 8.0.30
+-- Version de PHP : 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,23 +18,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `portfolio`
+-- Base de données : `portfolio`
 --
+CREATE DATABASE IF NOT EXISTS `portfolio` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `portfolio`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Structure de la table `category`
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `category`
+-- Déchargement des données de la table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `slug`) VALUES
@@ -46,34 +47,34 @@ INSERT INTO `category` (`id`, `name`, `slug`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Structure de la table `contact`
 --
 
 CREATE TABLE `contact` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telephone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brochure_filename` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brochure_filename` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `doctrine_migration_versions`
+-- Structure de la table `doctrine_migration_versions`
 --
 
 CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `execution_time` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Dumping data for table `doctrine_migration_versions`
+-- Déchargement des données de la table `doctrine_migration_versions`
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
@@ -96,21 +97,21 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Structure de la table `product`
 --
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` int(11) NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `main_picture` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `short_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int DEFAULT NULL,
+  `main_picture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `short_description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `product`
+-- Déchargement des données de la table `product`
 --
 
 INSERT INTO `product` (`id`, `name`, `price`, `slug`, `category_id`, `main_picture`, `short_description`) VALUES
@@ -172,23 +173,23 @@ INSERT INTO `product` (`id`, `name`, `price`, `slug`, `category_id`, `main_pictu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchase`
+-- Structure de la table `purchase`
 --
 
 CREATE TABLE `purchase` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `full_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `postal_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total` int(11) NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postal_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` int NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `purchased_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `purchase`
+-- Déchargement des données de la table `purchase`
 --
 
 INSERT INTO `purchase` (`id`, `user_id`, `full_name`, `address`, `postal_code`, `city`, `total`, `status`, `purchased_at`) VALUES
@@ -219,21 +220,21 @@ INSERT INTO `purchase` (`id`, `user_id`, `full_name`, `address`, `postal_code`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchase_item`
+-- Structure de la table `purchase_item`
 --
 
 CREATE TABLE `purchase_item` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `purchase_id` int(11) NOT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+  `id` int NOT NULL,
+  `product_id` int DEFAULT NULL,
+  `purchase_id` int NOT NULL,
+  `product_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_price` int NOT NULL,
+  `quantity` int NOT NULL,
+  `total` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `purchase_item`
+-- Déchargement des données de la table `purchase_item`
 --
 
 INSERT INTO `purchase_item` (`id`, `product_id`, `purchase_id`, `product_name`, `product_price`, `quantity`, `total`) VALUES
@@ -329,14 +330,14 @@ INSERT INTO `purchase_item` (`id`, `product_id`, `purchase_id`, `product_name`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reset_password_request`
+-- Structure de la table `reset_password_request`
 --
 
 CREATE TABLE `reset_password_request` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `selector` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hashed_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `selector` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hashed_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `requested_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -344,68 +345,68 @@ CREATE TABLE `reset_password_request` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `fullname`, `created_at`) VALUES
-(1, 'admin@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$Fe8yiM8RJ1vgRJRzkzc2BeRdjvlblUAexvmjrnhCxTog9/HnbcN1i', 'admin', '2023-04-25 19:49:06'),
-(2, 'user0@gmail.com', '[]', '$2y$13$1c45hKdweiE6LEgWhx/gmOZmeG8qburYwUFG4Sbxc63iJvROViJp.', 'Céline-Louise Pierre', '2023-04-25 19:49:07'),
-(3, 'user1@gmail.com', '[]', '$2y$13$AiGHFIB2YvYFCmUPIrCZveNMHFL5k/ZtnZebbiiGRxFPzAJuYCici', 'Laurence Martineau', '2023-04-25 19:49:07'),
-(4, 'user2@gmail.com', '[]', '$2y$13$sZMIUeRnA7q7HdktOVoNc.BbV2CVJWWHIkzkKl/wP/Z6p/M/GfBM.', 'Vincent-William Weber', '2023-04-25 19:49:08'),
-(5, 'user3@gmail.com', '[]', '$2y$13$qQVSbcplVnvuDNpyE4I3hu/N2Z.i3PQ20zSNob/SFuqPaxOYy4cUy', 'Charles Dubois', '2023-04-25 19:49:08'),
-(6, 'user4@gmail.com', '[]', '$2y$13$CjUxX0jMvQWfiGTjEi.9Vebrr2ZUPvkAr0zBjlujaL6jtYjoO4n5i', 'Antoine Jourdan', '2023-04-25 19:49:09');
+(1, 'admin@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$H6riW40oYnxiXBShumGVuu/.4xFYV5eZuLiObypkANDQmRgSrqcw2', 'admin', '2023-04-25 19:49:06'),
+(2, 'user0@gmail.com', '[]', '$2y$13$6SMeVaqOWIPKOU7hBj6QYOZK4iLi4MAWCOumk6Culbl0ZVlC6kr7O', 'Céline-Louise Pierre', '2023-04-25 19:49:07'),
+(3, 'user1@gmail.com', '[]', '$2y$13$6SMeVaqOWIPKOU7hBj6QYOZK4iLi4MAWCOumk6Culbl0ZVlC6kr7O', 'Laurence Martineau', '2023-04-25 19:49:07'),
+(4, 'user2@gmail.com', '[]', '$2y$13$6SMeVaqOWIPKOU7hBj6QYOZK4iLi4MAWCOumk6Culbl0ZVlC6kr7O', 'Vincent-William Weber', '2023-04-25 19:49:08'),
+(5, 'user3@gmail.com', '[]', '$2y$13$6SMeVaqOWIPKOU7hBj6QYOZK4iLi4MAWCOumk6Culbl0ZVlC6kr7O', 'Charles Dubois', '2023-04-25 19:49:08'),
+(6, 'user4@gmail.com', '[]', '$2y$13$6SMeVaqOWIPKOU7hBj6QYOZK4iLi4MAWCOumk6Culbl0ZVlC6kr7O', 'Antoine Jourdan', '2023-04-25 19:49:09');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `category`
+-- Index pour la table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contact`
+-- Index pour la table `contact`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `doctrine_migration_versions`
+-- Index pour la table `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
--- Indexes for table `product`
+-- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_D34A04AD12469DE2` (`category_id`);
 
 --
--- Indexes for table `purchase`
+-- Index pour la table `purchase`
 --
 ALTER TABLE `purchase`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_6117D13BA76ED395` (`user_id`);
 
 --
--- Indexes for table `purchase_item`
+-- Index pour la table `purchase_item`
 --
 ALTER TABLE `purchase_item`
   ADD PRIMARY KEY (`id`),
@@ -413,90 +414,90 @@ ALTER TABLE `purchase_item`
   ADD KEY `IDX_6FA8ED7D558FBEB9` (`purchase_id`);
 
 --
--- Indexes for table `reset_password_request`
+-- Index pour la table `reset_password_request`
 --
 ALTER TABLE `reset_password_request`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_7CE748AA76ED395` (`user_id`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `contact`
+-- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT for table `purchase`
+-- AUTO_INCREMENT pour la table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `purchase_item`
+-- AUTO_INCREMENT pour la table `purchase_item`
 --
 ALTER TABLE `purchase_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
--- AUTO_INCREMENT for table `reset_password_request`
+-- AUTO_INCREMENT pour la table `reset_password_request`
 --
 ALTER TABLE `reset_password_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `product`
+-- Contraintes pour la table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_product_category_id_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
--- Constraints for table `purchase`
+-- Contraintes pour la table `purchase`
 --
 ALTER TABLE `purchase`
   ADD CONSTRAINT `FK_6117D13BA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `purchase_item`
+-- Contraintes pour la table `purchase_item`
 --
 ALTER TABLE `purchase_item`
   ADD CONSTRAINT `FK_6FA8ED7D4584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   ADD CONSTRAINT `FK_6FA8ED7D558FBEB9` FOREIGN KEY (`purchase_id`) REFERENCES `purchase` (`id`);
 
 --
--- Constraints for table `reset_password_request`
+-- Contraintes pour la table `reset_password_request`
 --
 ALTER TABLE `reset_password_request`
   ADD CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
