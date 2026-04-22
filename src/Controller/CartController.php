@@ -45,12 +45,13 @@ class CartController extends AbstractController
         if ($request->query->get('returnToCart')) {
             return $this->redirectToRoute('cart_show');
         }
-
+/*
         //$request->getSession()->remove('cart');
         return $this->redirectToRoute('product_show', [
             'category_slug' => $product->getCategory()->getSlug(),
             'slug' => $product->getSlug()
-        ]);
+        ]);*/
+        return new Response('Content', Response::HTTP_OK);
     }
 
     #[Route('/cart/decrement/{id}', name: 'cart_decrement', requirements: ['id' => '\\d+'])]

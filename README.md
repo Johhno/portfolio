@@ -29,6 +29,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser Invoke-Rest
 ```shell
 scoop install symfony-cli
 ```
+### Installer Composer 
+https://getcomposer.org/
 
 ### Mettre à jour Composer et dépendances Symfony
 #### Symfony Flex
