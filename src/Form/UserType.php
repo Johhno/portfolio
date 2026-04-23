@@ -23,14 +23,15 @@ class UserType extends AbstractType
                 'attr' => ['class' => 'form-group form-control col-md-12', 'placeholder' => 'Tapez votre email'],
                 'required' => true
             ])
-            ->add('password', TextType::class, [
-                'attr' => ['class' => 'form-group form-control col-md-12', 'placeholder' => 'Tapez votre mot de passe'],
-                'required' => true
-            ])
             ->add('fullname', TextType::class, [
                 'attr' => ['class' => 'form-group form-control col-md-12', 'placeholder' => 'Tapez votre nom prenom'],
                 'required' => false
             ])
+            ->add('password', TextType::class, [
+                'attr' => ['class' => 'form-group form-control col-md-12', 'placeholder' => 'Tapez votre mot de passe'],
+                'required' => true
+            ])
+
             ->add('captcha', Recaptcha3Type::class, [
                 
                 'constraints' => new Recaptcha3(

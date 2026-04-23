@@ -20,10 +20,7 @@
 				<a class="nav-link" >|</a>
 			</li>
 			<li class="nav-item">
-				<!--<a class="nav-link" href="{{ path('don') }}">Faire un don</a>-->
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{ path('don') }}">Pay</a>
+				<a class="nav-link" href="{{ path('don') }}">Payer</a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,7 +48,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path('cart_show') }}">
 					<i class="fas fa-shopping-cart"></i>
-					Panier ({{cartService.total()/100}} €)
+					Panier (<span id="cart-total">{{cartService.total()/100}}</span> €)
 				</a>
 			</li>
 			
