@@ -8,6 +8,24 @@
    }
 
 */
+  .product-card,
+  .project-card {
+      height: 100%;
+  }
+
+  .product-card .card-body,
+  .project-card .card-body {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .product-card img,
+  .project-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+  }
+
   #cv {
       margin-left: 0;
       margin-right: 0;

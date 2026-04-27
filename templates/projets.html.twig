@@ -1,17 +1,19 @@
 {% extends "base.html.twig" %}
 {% block body %}
-<h3 >PROJET PERSONNEL</h3>
+<h3>PROJET PERSONNEL</h3>
   <div class="row" >
    
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6 col-12 mb-4">
          
-        <div class="card">
+        <div class="card h-100 project-card">
             
-            <div class='card-body'>
+            <div class='card-body d-flex flex-column'>
             <img src='https://picsum.photos/id/1/500/200'/>
                 <h4 class="card-title">Sudoku</h4>
 
-                <span class="badge badge-info"> Java </span>
+                <div class="mb-2">
+                    <span class="badge badge-info"> Java </span>
+                </div>
                 <p class='card-text'>Application générateur et résolveur de sudokus.</p>
     
             </div>
@@ -19,12 +21,14 @@
     </div>
 
 
-    <div class="col-lg-6">
-        <div class="card">
-            <div class='card-body'>
+    <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="card h-100 project-card">
+            <div class='card-body d-flex flex-column'>
                 <img src='{{ asset('assets/img/projets-java-paint.png')}}'/>
                 <h4 class="card-title">Paint</h4>
-                <span class="badge badge-info"> Java </span>
+                <div class="mb-2">
+                    <span class="badge badge-info"> Java </span>
+                </div>
                 <p class='card-text'> Application de manipulation d'image matricielles.
                           Implémentation de fonctionnalités comme les couleurs, les formes et l'épaisseur.
                 </p>
@@ -34,27 +38,31 @@
 
     <div class="w-100"></div>
 
-    <div class="col-lg-6">
-        <div class="card">
+    <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="card h-100 project-card">
             
-            <div class='card-body'>
+            <div class='card-body d-flex flex-column'>
              <img src='https://picsum.photos/id/3/500/200'/>
                 <h4 class="card-title">Agar.io</h4>
-                <span class="badge badge-info"> Java </span>
+                <div class="mb-2">
+                    <span class="badge badge-info"> Java </span>
+                </div>
 
                 <p class='card-text'>Jeu dont le but est de prendre du volume en absobant les cellules.</p>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-6">
-        <div class="card">
+    <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="card h-100 project-card">
             
-            <div class='card-body'>
+            <div class='card-body d-flex flex-column'>
             <img src='https://picsum.photos/id/4/500/200'/>
                 <h4 class="card-title">Troc nc</h4>
 
-                <span class="badge badge-info">PHP </span>
+                <div class="mb-2">
+                    <span class="badge badge-info">PHP </span>
+                </div>
                 <p class='card-text'>Conception d’un site web permettant aux utilisateurs inscrits de proposer et de répondre aux annonces.
                 </p>
             </div>
@@ -62,15 +70,17 @@
     </div>
 
 
- <div class="col-lg-6">
-        <div class="card">
+ <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="card h-100 project-card">
             
-            <div class='card-body'>
+            <div class='card-body d-flex flex-column'>
             <img src='https://picsum.photos/id/5/500/200'/>
                 <h4 class="card-title">Postman</h4>
 
-                <span class="badge badge-info">PHP </span>
-                <span class="badge badge-warning">JS </span>
+                <div class="mb-2">
+                    <span class="badge badge-info">PHP </span>
+                    <span class="badge badge-warning">JS </span>
+                </div>
 
                 <p class='card-text'>Application permettant d'envoyer des requêtes pour tester les API.</p>
     

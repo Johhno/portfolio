@@ -25,7 +25,7 @@ Page de : {{ product.name }}
             {{product.category.name}}
         </span>
         <p> {{product.shortDescription}}</p>
-        <a href="{{ path('cart_add', { 'id':product.id})}}" class="btn btn-success btn-lg">
+        <a href="{{ path('cart_add', { 'id':product.id})}}" class="btn btn-success btn-lg js-add-to-cart">
             <i class="fas fa-shopping-cart"></i>    
             Ajouter au panier
         </a>

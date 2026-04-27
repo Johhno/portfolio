@@ -8,6 +8,7 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
@@ -45,13 +46,19 @@ class CartController extends AbstractController
         if ($request->query->get('returnToCart')) {
             return $this->redirectToRoute('cart_show');
         }
-/*
-        //$request->getSession()->remove('cart');
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'success' => true,
+                'total' => $this->cartService->getTotal(),
+                'totalDisplay' => number_format($this->cartService->getTotal() / 100, 2, '.', ''),
+            ]);
+        }
+
         return $this->redirectToRoute('product_show', [
             'category_slug' => $product->getCategory()->getSlug(),
             'slug' => $product->getSlug()
-        ]);*/
-        return new Response('Content', Response::HTTP_OK);
+        ]);
     }
 
     #[Route('/cart/decrement/{id}', name: 'cart_decrement', requirements: ['id' => '\\d+'])]
