@@ -2,6 +2,16 @@
 
 {% block title %}Votre panier{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/maps.css') }}">
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{{ asset('assets/js/maps.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places&callback=initAutocomplete" async defer></script>
+{% endblock %}
+
 {% block body %}
 
 
@@ -30,7 +40,7 @@
                         <td>{{item.total /100}} €</td>
                         <td>
                             <a href="{{ path('cart_delete', {'id' : item.product.id}) }}" class="btn btn-sm btn-danger">
-                                X    
+                                X
                             </a>
                         </td>
                     </tr>
@@ -60,7 +70,7 @@
   height="250"
   frameborder="0" style="border:0"
   referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAir6_HMueSArrYsoUySI2zhz_xXktJ50M&q=Eiffel+Tower,Paris+France"
+  src="https://www.google.com/maps/embed/v1/place?key={{ google_maps_api_key }}&q=Eiffel+Tower,Paris+France"
   allowfullscreen>
 </iframe>
             <button class="submit btn btn-success">Je confirme</button>
@@ -73,8 +83,6 @@
         {% endif %}
 
     {% else %}
-        <h5>Votre panier est vide</h5> 
+        <h5>Votre panier est vide</h5>
     {% endif %}
 {% endblock %}
- 
-

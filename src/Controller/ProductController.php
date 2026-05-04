@@ -2,14 +2,35 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductRepository;
 
 class ProductController extends AbstractController
 {
+    #[Route('/api/products/search', name: 'product_search', methods: ['GET'])]
+    public function search(Request $request, ProductRepository $productRepository): JsonResponse
+    {
+        $q = trim($request->query->get('q', ''));
+        if (mb_strlen($q) < 3) {
+            return $this->json([]);
+        }
+        $products = $productRepository->search($q);
+        $data = array_map(fn(Product $p) => [
+            'name'         => $p->getName(),
+            'price'        => $p->getPrice() / 100,
+            'slug'         => $p->getSlug(),
+            'categorySlug' => $p->getCategory()?->getSlug(),
+        ], $products);
+
+        return $this->json($data);
+    }
+
     #[Route('/produits', name: 'produits')]
     public function produits(ProductRepository $productRepository)
     {

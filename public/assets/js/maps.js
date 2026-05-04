@@ -1,11 +1,16 @@
 function initAutocomplete() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -33.8688, lng: 151.2195 },
+    const mapEl = document.getElementById("map");
+    if (!mapEl) return;
+
+    const map = new google.maps.Map(mapEl, {
+        center: { lat: 48.8566, lng: 2.3522 }, // Paris
         zoom: 13,
         mapTypeId: "roadmap",
     });
 
     const input = document.getElementById("pac-input");
+    if (!input) return;
+
     const searchBox = new google.maps.places.SearchBox(input);
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -32,7 +37,6 @@ function initAutocomplete() {
 
         places.forEach((place) => {
             if (!place.geometry || !place.geometry.location) {
-                console.log("Returned place contains no geometry");
                 return;
             }
 
@@ -61,5 +65,3 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
-
-window.onload = initAutocomplete;
