@@ -25,6 +25,7 @@ class Product
     private $slug;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "products")]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private $category;
 
     #[ORM\Column(type: "string", length: 255)]
