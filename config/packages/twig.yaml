@@ -3,4 +3,3 @@ twig:
     globals:
         categoryRepository: "@App\\Repository\\CategoryRepository"
         cartService: "@App\\Cart\\CartService"
-        google_maps_api_key: '%env(GOOGLE_MAPS_API_KEY)%'

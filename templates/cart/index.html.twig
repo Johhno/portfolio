@@ -2,14 +2,7 @@
 
 {% block title %}Votre panier{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/maps.css') }}">
-{% endblock %}
-
 {% block extra_scripts %}
-    <script src="{{ asset('assets/js/maps.js') }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}
 
 {% block body %}
@@ -59,20 +52,7 @@
             <h2>Confirmez votre commande en remplissant ce formulaire</h2>
             {{ form_start( confirmationForm, {'action': path('purchase_confirm')} ) }}
 
-<div style='display:block;'>
-	    <input id="pac-input" class="controls" type="text" placeholder="Saisir votre adresse de livraison"/>
-    <div id="map"></div>
-
-    </div>
             {{ form_widget(confirmationForm) }}
-<iframe
-  width="450"
-  height="250"
-  frameborder="0" style="border:0"
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key={{ google_maps_api_key }}&q=Eiffel+Tower,Paris+France"
-  allowfullscreen>
-</iframe>
             <button class="submit btn btn-success">Je confirme</button>
 
             {{ form_end(confirmationForm) }}
