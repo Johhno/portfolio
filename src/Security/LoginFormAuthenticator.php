@@ -45,8 +45,6 @@ class LoginFormAuthenticator extends AbstractGuardAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        // Vérifier que le mot de passe fourni correspond bien au mot de passe de la base de données
-        //$credentials['password] matches => $user->getPassword()
         $isValid = $this->encoder->isPasswordValid($user, $credentials['password']);
 
         if (!$isValid) {

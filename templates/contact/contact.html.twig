@@ -20,14 +20,12 @@
 
 	{#{ form_widget(formView) }#}
 
-	{# Elements Twig séparés donc form.captcha permis #}
 	{{ form_row(formView.nom) }}
 	{{ form_row(formView.prenom) }}
 	{{ form_row(formView.telephone) }}
 	{{ form_row(formView.email) }}
 	{{ form_row(formView.message) }}
 	{{ form_row(formView.brochure) }}
-	{{ form_row(formView.captcha) }}
 	<button type="submit" class="btn btn-primary">
 		<i class="fas fa-save"></i>Envoyer
 	</button>

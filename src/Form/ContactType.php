@@ -13,9 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\File;
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;  // Ajout de RecaptchaType
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
-
 class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -64,15 +61,7 @@ class ContactType extends AbstractType
 
                 ]
             ])
-            ->add('captcha', Recaptcha3Type::class, [
-                
-                'constraints' => new Recaptcha3(
-                    [
-                        'message' => 'Captcha invalide',
-                    ]
-                ),
-                'action_name' => 'contact'
-            ]);
+        ;
 
         // Evenement : affiche le bloc nom si l'id est null
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {

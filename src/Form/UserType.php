@@ -3,9 +3,6 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type; 
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
@@ -32,15 +29,7 @@ class UserType extends AbstractType
                 'required' => true
             ])
 
-            ->add('captcha', Recaptcha3Type::class, [
-                
-                'constraints' => new Recaptcha3(
-                    [
-                        'message' => 'Captcha invalide',
-                    ]
-                ),
-                'action_name' => 'inscription'
-            ]);
+        ;
 
         // Evenement : affiche le bloc nom si l'id est null
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {

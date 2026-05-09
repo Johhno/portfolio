@@ -4,9 +4,6 @@ namespace App\Form;
 
 
 use Symfony\Component\Form\AbstractType;
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type; 
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -31,15 +28,7 @@ class LoginType extends AbstractType
                     'placeholder' => 'Mot de passe '
                 ]
             ])
-            ->add('captcha', Recaptcha3Type::class, [
-                
-                'constraints' => new Recaptcha3(
-                    [
-                        'message' => 'Captcha invalide',
-                    ]
-                ),
-                'action_name' => 'login'
-            ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
