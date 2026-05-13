@@ -22,7 +22,7 @@
   .product-card img,
   .project-card img {
       width: 100%;
-      height: auto;
+      height: 220px;
       object-fit: cover;
   }
 
