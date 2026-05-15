@@ -1,6 +1,19 @@
 {% extends "base.html.twig" %}
-{% block body %}
 
-	{{ msg }}
-	Le paiement a été effectué avec succès.
+{% block title %}Paiement réussi — Portfolio{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 text-center">
+        <div class="mb-4" style="font-size: 5rem; color: #28a745;">&#10003;</div>
+        <h2 class="mb-3">Paiement réussi !</h2>
+        <p class="text-muted mb-4">
+            Votre paiement a bien été traité. Merci pour votre contribution.
+        </p>
+        <a href="{{ path('homepage') }}" class="btn btn-success mr-2">Retour à l'accueil</a>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('purchase_index') }}" class="btn btn-outline-secondary">Mes commandes</a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

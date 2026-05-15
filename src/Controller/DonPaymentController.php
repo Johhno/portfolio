@@ -12,7 +12,7 @@ class DonPaymentController extends AbstractController
     #[Route('/don', name: 'don')]
     public function pay()
     {
-        return $this->render('don.html.twig');
+        return $this->render('paiement.html.twig');
     }
 
 
@@ -57,19 +57,17 @@ class DonPaymentController extends AbstractController
             $message_exception .= '<br> Message is : ' . $e->getError()->message . '<br>';
             return $this->echec_paiement($e->getError()->code);
         } catch (\Stripe\Exception\RateLimitException $e) {
-            // Too many requests made to the API too quickly
+            return $this->echec_paiement('rate_limit');
         } catch (\Stripe\Exception\InvalidRequestException $e) {
-            // Invalid parameters were supplied to Stripe's API
+            return $this->echec_paiement('invalid_request');
         } catch (\Stripe\Exception\AuthenticationException $e) {
-            // Authentication with Stripe's API failed
-            // (maybe you changed API keys recently)
+            return $this->echec_paiement('authentication');
         } catch (\Stripe\Exception\ApiConnectionException $e) {
-            // Network communication with Stripe failed
+            return $this->echec_paiement('api_connection');
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            // Display a very generic error to the user, and maybe send
-            // yourself an email
+            return $this->echec_paiement('api_error');
         } catch (\Exception $e) {
-            // Something else happened, completely unrelated to Stripe
+            return $this->echec_paiement(null);
         }
         return $this->reussi_paiement();
         return new Response("bro");
@@ -82,8 +80,8 @@ class DonPaymentController extends AbstractController
     }
 
     #[Route('/echec', name: 'echec')]
-    function echec_paiement($data)
-    {//data est le code d'erreur de stripe $data
-        return $this->render('paiement_echec.html.twig', ['msg' => '']);
+    function echec_paiement($data = null)
+    {
+        return $this->render('paiement_echec.html.twig', ['msg' => $data]);
     }
 }

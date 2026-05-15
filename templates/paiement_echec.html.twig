@@ -1,12 +1,44 @@
 {% extends "base.html.twig" %}
+
+{% block title %}Paiement échoué — Portfolio{% endblock %}
+
 {% block body %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 text-center">
+        <div class="mb-4" style="font-size: 5rem; color: #dc3545;">&#10007;</div>
+        <h2 class="mb-3">Paiement échoué</h2>
 
+        {% if msg == 'card_declined' %}
+            <p class="text-muted mb-2">Votre carte a été refusée.</p>
+            <p class="text-muted mb-4">Veuillez vérifier vos informations ou contacter votre banque.</p>
+        {% elseif msg == 'expired_card' %}
+            <p class="text-muted mb-2">Votre carte est expirée.</p>
+            <p class="text-muted mb-4">Veuillez utiliser une carte valide.</p>
+        {% elseif msg == 'insufficient_funds' %}
+            <p class="text-muted mb-2">Fonds insuffisants sur votre carte.</p>
+            <p class="text-muted mb-4">Veuillez vérifier votre solde ou utiliser une autre carte.</p>
+        {% elseif msg == 'incorrect_cvc' %}
+            <p class="text-muted mb-2">Le code de sécurité (CVC) est incorrect.</p>
+            <p class="text-muted mb-4">Veuillez vérifier le code à l'arrière de votre carte.</p>
+        {% elseif msg == 'invalid_request' %}
+            <p class="text-muted mb-2">Requête invalide.</p>
+            <p class="text-muted mb-4">Une erreur de configuration est survenue. Veuillez contacter le support.</p>
+        {% elseif msg == 'authentication' %}
+            <p class="text-muted mb-2">Erreur d'authentification Stripe.</p>
+            <p class="text-muted mb-4">Veuillez contacter le support.</p>
+        {% elseif msg == 'rate_limit' %}
+            <p class="text-muted mb-2">Trop de tentatives.</p>
+            <p class="text-muted mb-4">Veuillez patienter quelques instants avant de réessayer.</p>
+        {% elseif msg == 'api_connection' %}
+            <p class="text-muted mb-2">Problème de connexion au service de paiement.</p>
+            <p class="text-muted mb-4">Veuillez vérifier votre connexion et réessayer.</p>
+        {% else %}
+            <p class="text-muted mb-2">Une erreur est survenue lors du traitement de votre paiement.</p>
+            <p class="text-muted mb-4">Veuillez réessayer ou contacter votre banque.</p>
+        {% endif %}
 
-	{% if msg == "card_declined" %}
-		If card_declined
-	{% else %}
-		Else expired_card
-	{% endif %}>
-				
-					Echec
+        <a href="{{ path('don') }}" class="btn btn-danger mr-2">Réessayer</a>
+        <a href="{{ path('homepage') }}" class="btn btn-outline-secondary">Retour à l'accueil</a>
+    </div>
+</div>
 {% endblock %}
