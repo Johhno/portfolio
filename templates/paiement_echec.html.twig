@@ -8,18 +8,33 @@
         <div class="mb-4" style="font-size: 5rem; color: #dc3545;">&#10007;</div>
         <h2 class="mb-3">Paiement échoué</h2>
 
-        {% if msg == 'card_declined' %}
-            <p class="text-muted mb-2">Votre carte a été refusée.</p>
-            <p class="text-muted mb-4">Veuillez vérifier vos informations ou contacter votre banque.</p>
+        {% if msg == 'insufficient_funds' %}
+            <p class="text-muted mb-2">Fonds insuffisants sur votre carte.</p>
+            <p class="text-muted mb-4">Veuillez vérifier votre solde ou utiliser une autre carte.</p>
         {% elseif msg == 'expired_card' %}
             <p class="text-muted mb-2">Votre carte est expirée.</p>
             <p class="text-muted mb-4">Veuillez utiliser une carte valide.</p>
-        {% elseif msg == 'insufficient_funds' %}
-            <p class="text-muted mb-2">Fonds insuffisants sur votre carte.</p>
-            <p class="text-muted mb-4">Veuillez vérifier votre solde ou utiliser une autre carte.</p>
         {% elseif msg == 'incorrect_cvc' %}
             <p class="text-muted mb-2">Le code de sécurité (CVC) est incorrect.</p>
             <p class="text-muted mb-4">Veuillez vérifier le code à l'arrière de votre carte.</p>
+        {% elseif msg == 'incorrect_number' %}
+            <p class="text-muted mb-2">Le numéro de carte est incorrect.</p>
+            <p class="text-muted mb-4">Veuillez vérifier le numéro saisi.</p>
+        {% elseif msg in ['lost_card', 'stolen_card', 'fraudulent', 'pickup_card'] %}
+            <p class="text-muted mb-2">Votre carte ne peut pas être utilisée.</p>
+            <p class="text-muted mb-4">Veuillez contacter votre banque.</p>
+        {% elseif msg in ['do_not_honor', 'no_action_taken', 'not_permitted', 'restricted_card', 'transaction_not_allowed', 'service_not_allowed'] %}
+            <p class="text-muted mb-2">Votre banque a refusé la transaction.</p>
+            <p class="text-muted mb-4">Veuillez contacter votre banque pour plus d'informations.</p>
+        {% elseif msg == 'card_velocity_exceeded' %}
+            <p class="text-muted mb-2">Trop de tentatives avec cette carte.</p>
+            <p class="text-muted mb-4">Veuillez patienter ou utiliser une autre carte.</p>
+        {% elseif msg == 'try_again_later' %}
+            <p class="text-muted mb-2">Erreur temporaire.</p>
+            <p class="text-muted mb-4">Veuillez réessayer dans quelques instants.</p>
+        {% elseif msg in ['card_declined', 'generic_decline'] %}
+            <p class="text-muted mb-2">Votre carte a été refusée.</p>
+            <p class="text-muted mb-4">Veuillez vérifier vos informations ou contacter votre banque.</p>
         {% elseif msg == 'invalid_request' %}
             <p class="text-muted mb-2">Requête invalide.</p>
             <p class="text-muted mb-4">Une erreur de configuration est survenue. Veuillez contacter le support.</p>

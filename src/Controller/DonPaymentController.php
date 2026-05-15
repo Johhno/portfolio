@@ -55,7 +55,8 @@ class DonPaymentController extends AbstractController
             $message_exception .= '<br> Code is : ' . $e->getError()->code . '<br>';
             $message_exception .= '<br> Param is : ' . $e->getError()->param . '<br>';
             $message_exception .= '<br> Message is : ' . $e->getError()->message . '<br>';
-            return $this->echec_paiement($e->getError()->code);
+            $code = $e->getError()->decline_code ?? $e->getError()->code;
+            return $this->echec_paiement($code);
         } catch (\Stripe\Exception\RateLimitException $e) {
             return $this->echec_paiement('rate_limit');
         } catch (\Stripe\Exception\InvalidRequestException $e) {
@@ -70,7 +71,7 @@ class DonPaymentController extends AbstractController
             return $this->echec_paiement(null);
         }
         return $this->reussi_paiement();
-        return new Response("bro");
+        //return new Response("bro");
     }
 
     #[Route('/reussi', name: 'reussi')]
