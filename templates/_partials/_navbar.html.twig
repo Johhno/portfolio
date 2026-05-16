@@ -9,13 +9,7 @@
 				<a class="nav-link" href="{{ path('homepage') }}">Home
 				</a>
 			</li>
- 
-			<li class="nav-item">
-				<a class="nav-link" href="{{ path('projets') }}">Projets</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{ path('envoyerMessageContact') }}">Contact</a>
-			</li>
+
 			<li class="nav-item">
 				<a class="nav-link" >|</a>
 			</li>
@@ -26,7 +20,7 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Categories
 				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<div id='categories' class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					{% for category in categoryRepository.findAll()	 %}
 						<a class="dropdown-item" href="{{ path('product_category', {'slug':category.slug}) }}">{{category.name}}</a>
 					{% endfor %}
@@ -57,22 +51,40 @@
 				</a>
 			</li>
 			
-				{% if app.user %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('purchase_index') }}">Mes commandes</a>
-					</li>
+		{% if app.user %}
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('purchase_index') }}">Mes commandes</a>
+			</li>
 
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('security_logout') }}">Logout</a>
-					</li>
-				{% else %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('security_login') }}">Login</a>
-					</li>
-				{% endif %}
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('security_logout') }}">Logout</a>
+			</li>
+
+
+
+
+		{% else %}
+
+
+
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Compte
+				</a>
+				<div id='compte' class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					 
+						<a class="dropdown-item" href="{{ path('inscription') }}">Inscription</a>
+						<a class="dropdown-item" href="{{ path('security_login') }}">Login</a>
+					 
+				</div>
+			</li>
+
+
+
+
+
+
+		{% endif %}
 		</ul>
 	</div>
 </nav>

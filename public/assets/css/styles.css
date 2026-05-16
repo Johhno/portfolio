@@ -109,3 +109,7 @@
     color: #6c757d;
     font-size: 0.875rem;
 }
+
+#categories, #compte{
+    padding:0 !important; 
+}
