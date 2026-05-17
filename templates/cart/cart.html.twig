@@ -12,6 +12,7 @@
     {% if items| length > 0 %}
         <table class="table">
             <thead>
+                <th></th>
                 <th>Produit</th>
                 <th>Prix</th>
                 <th>Quantité</th>
@@ -19,25 +20,35 @@
                 <th></th>
             </thead>
             <tbody>
-                {% for item in items %}
-                    <tr>
-                        <td>{{item.product.name}}</td>
-                        <td>{{item.product.price/100}} €</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="{{ path("cart_decrement", {'id': item.product.id}) }}" >-</a>
-                            <i class="fas fa-minus"></i>
-                                {{item.qty}}
-                            <a class="btn btn-sm btn-primary" href="{{ path("cart_add", {'id': item.product.id}) }}?returnToCart=true" >+</a>
-                            <i class="fas fa-plus"></i>
-                        </td>
-                        <td>{{item.total /100}} €</td>
-                        <td>
-                            <a href="{{ path('cart_delete', {'id' : item.product.id}) }}" class="btn btn-sm btn-danger">
-                                X
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor%}
+            {% for item in items %}
+                <tr>
+                    <td><img src="{{ item.product.mainPicture }}" alt="{{ item.product.name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;"></td>
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.product.price/100}} €</td>
+
+
+<td>
+    <div class="d-flex align-items-center gap-2">
+        <a class="btn btn-sm btn-danger" href="{{ path('cart_decrement', {'id': item.product.id}) }}">
+            <i class="fas fa-minus"></i>
+        </a>
+        <span class="fw-bold px-2">{{ item.qty }}</span>
+        <a class="btn btn-sm btn-success" href="{{ path('cart_add', {'id': item.product.id}) }}?returnToCart=true">
+            <i class="fas fa-plus"></i>
+        </a>
+    </div>
+</td>
+
+
+
+                    <td>{{item.total /100}} € </td>
+                    <td>
+                        <a href="{{ path('cart_delete', {'id' : item.product.id}) }}" class="btn btn-sm btn-danger">
+                             <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor%}
             </tbody>
             <tfoot>
                 <tr>
@@ -57,7 +68,7 @@
 
             {{ form_end(confirmationForm) }}
         {% else %}
-            <h2>Vous devez être connecté pour confirmer cette commande.</h2>
+            <h2>Vous devez vous connecter pour confirmer cette commande.</h2>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">Connexion</button>
             ou <button type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#signupModal">Créez un compte</button>
         {% endif %}
