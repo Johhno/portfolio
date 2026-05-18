@@ -22,7 +22,15 @@
             <tbody>
             {% for item in items %}
                 <tr>
-                    <td><img src="{{ item.product.mainPicture }}" alt="{{ item.product.name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;"></td>
+                    <td>
+                        <a href="{{ path('product_show', {
+                            'category_slug': item.product.category.slug,
+                            'slug': item.product.slug
+                        }) }}">
+                            <img class='cart-image' src="{{ item.product.mainPicture }}"
+                            alt="{{ item.product.name }}">
+                        </a>
+                    </td>
                     <td>{{item.product.name}}</td>
                     <td>{{item.product.price/100}} €</td>
 
@@ -52,7 +60,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">Total:</td>
+                    <td colspan="4">Total:</td>
                     <td colspan="3">{{total/100}} €</td>
                 </tr>
             </tfoot>

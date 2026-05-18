@@ -74,6 +74,7 @@ class CartService
 
         if ($cart[$id] === 1) {
             $this->remove($id);
+            return;
         }
         $cart[$id]--;
 
