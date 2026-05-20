@@ -16,18 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-    /** @var ProductRepository */
-    protected $productRepository;
-
-    /** @var CartService logique métier du panier (session) */
-    protected $cartService;
-
+    
     // Symfony injecte automatiquement les dépendances via le constructeur
-    public function __construct(ProductRepository $productRepository, CartService $cartService)
-    {
-        $this->productRepository = $productRepository;
-        $this->cartService = $cartService;
-    }
+    public function __construct(
+        private ProductRepository $productRepository, 
+        private CartService $cartService)
+    {}
 
     // Ajoute 1 exemplaire du produit {id} au panier
     #[Route('/cart/add/{id}', name: 'cart_add', requirements: ['id' => '\\d+'])]

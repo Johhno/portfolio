@@ -24,17 +24,11 @@ use App\Event\InscriptionSuccessEvent;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ContactController extends AbstractController
 {
-    protected $em;
-    protected $dispatcher;
-
 
     public function __construct(
-        EventDispatcherInterface $dispatcher, 
-        EntityManagerInterface $em)
-    {
-        $this->em = $em;
-        $this->dispatcher = $dispatcher;
-    }
+        private EventDispatcherInterface $dispatcher, 
+        private EntityManagerInterface $em)
+    {}
 
     #[Route('/contact', name: 'envoyerMessageContact')]
     public function envoyerMessageContact(

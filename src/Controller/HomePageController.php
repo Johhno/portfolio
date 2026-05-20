@@ -16,22 +16,11 @@ class HomePageController extends AbstractController
     {
         $this->encoder = $encoder;
     }
+    
     #[Route('/', name: 'homepage')]
     public function hello()
     {
         return $this->render('homepage.html.twig');
-    }
-
-    #[Route('/cv', name: 'cv')]
-    public function cv()
-    {
-        return $this->render('cv.html.twig');
-    }
-
-    #[Route('/projets', name: 'projets')]
-    public function projets()
-    {
-        return $this->render('projets.html.twig');
     }
 
     #[Route('/upload', name: 'upload')]

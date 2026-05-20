@@ -13,16 +13,11 @@ use Symfony\Component\Security\Core\Security;
 
 class ContactConfirmationController
 {
-    protected $formFactory;
-    protected $router;
-    protected $security;
-
-    public function __construct(FormFactoryInterface $formFactory, RouterInterface $router, Security $security)
-    {
-        $this->formFactory = $formFactory;
-        $this->router = $router;
-        $this->security = $security;
-    }
+    public function __construct(
+        private FormFactoryInterface $formFactory,
+        private RouterInterface $router,
+        private Security $security,
+    ) {}
 
     #[Route('contact/confirm', name: 'contact_confirm')]
     public function confirm(Request $request, FlashBagInterface $flashbag)

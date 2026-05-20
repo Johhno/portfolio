@@ -22,14 +22,11 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 #[Route('/reset-password')]
 class ResetPasswordController extends AbstractController
 {
-    private ResetPasswordHelperInterface $resetPasswordHelper;
-    private EntityManagerInterface $entityManager;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, EntityManagerInterface $entityManager)
-    {
-        $this->resetPasswordHelper = $resetPasswordHelper;
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        private ResetPasswordHelperInterface $resetPasswordHelper, 
+        private EntityManagerInterface $entityManager)
+    {}
 
     /**
      * Display & process form to request a password reset.

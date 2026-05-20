@@ -11,16 +11,12 @@ use Symfony\Component\Security\Core\Security;
 
 class PurchasePersister
 {
-    protected $security;
-    protected $cartService;
-    protected $em;
 
-    public function __construct(Security $security, CartService $cartService, EntityManagerInterface $em)
-    {
-        $this->security = $security;
-        $this->cartService = $cartService;
-        $this->em = $em;
-    }
+    public function __construct(
+        private Security $security, 
+        private CartService $cartService, 
+        private EntityManagerInterface $em)
+    {}
 
     public function storePurchase(Purchase $purchase)
     {

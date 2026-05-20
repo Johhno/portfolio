@@ -8,24 +8,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartService
 {
-    /**
-     * @var SessionInterface|null
-     */
-    protected $session;
-
-    protected RequestStack $requestStack;
-
-    /**
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
-
-    public function __construct(RequestStack $requestStack, ProductRepository $productRepository)
-    {
-        $this->requestStack = $requestStack;
-        $this->productRepository = $productRepository;
-    }
+    public function __construct(
+        private RequestStack $requestStack, 
+        private ProductRepository $productRepository)
+    {}
 
     protected function getCart(): array
     {

@@ -16,9 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PurchaseConfirmationController extends AbstractController
 {
 
-    public function __construct(private CartService $cartService, private EntityManagerInterface $em, private PurchasePersister $persister)
-    {
-    }
+    public function __construct(
+        private CartService $cartService, 
+        private EntityManagerInterface $em, 
+        private PurchasePersister $persister)
+    {}
 
     #[Route('/purchase/confirm', name: 'purchase_confirm')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté pour confirmer une commande.')]
