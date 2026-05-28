@@ -18,6 +18,8 @@ Le portfolio est développé avec Symfony 6.4, utilisant :
 ## Prérequis
 Importer la base de données
 importer les fichiers .env
+Creer user
+C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin\mysql -u root -e "CREATE USER 'portfolio_user'@'localhost' IDENTIFIED BY 'portfolio_pass'; GRANT ALL PRIVILEGES ON portfolio.* TO 'portfolio_user'@'localhost'; FLUSH PRIVILEGES;"
 ### Installer Scoop
 Ouvrir powershell en mode sans admin
 windows + r > runas /trustlevel:0x20000 powershell
