@@ -20,7 +20,9 @@ jobs:
           php-version: '8.1'
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-scripts
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Run PHPUnit
         run: php bin/phpunit
