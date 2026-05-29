@@ -66,9 +66,11 @@ class Product
 
     public function setPrice(int $price): self
     {
-        $this->price = $price;
-
-        return $this;
+    if ($price < 0) {
+        throw new \InvalidArgumentException('Le prix ne peut pas être négatif.');
+    }
+    $this->price = $price;
+    return $this;
     }
 
     public function getSlug(): ?string
